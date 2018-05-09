@@ -32,6 +32,8 @@ class GameScene: SKScene {
 	override func didMove(to view: SKView) {
 		let map = createMap()
 		map.anchorPoint = CGPoint(x:0.5, y:0.5)
+		map.xScale = 0.2
+		map.yScale = 0.2
 		self.addChild(map)
 	}
 	
@@ -103,7 +105,17 @@ class GameScene: SKScene {
 						($0.name ?? "") == "Water"}) {
 						map.setTileGroup(g, forColumn: col, row: row)
 					}
-					//ADD OTHER CASES HERE FOR OTHER TILE GROUPS
+				case -0.5..<0:
+					if let g = tileSet.tileGroups.first(where: {
+						($0.name ?? "") == "Sand"}) {
+						map.setTileGroup(g, forColumn: col, row: row)
+					}
+				case 0..<(0.45):
+					if let g = tileSet.tileGroups.first(where: {
+						($0.name ?? "") == "Cobblestone"}) {
+						map.setTileGroup(g, forColumn: col, row: row)
+					}
+				//ADD OTHER CASES HERE FOR OTHER TILE GROUPS
 				//Set as our grass tile
 				default:
 					if let g = tileSet.tileGroups.first(where: {
